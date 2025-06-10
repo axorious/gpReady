@@ -24,12 +24,8 @@ app.use("/api", routes);
 
 mongoose
   .connect(process.env.DB_CONNECTION_STRING)
-  .then(() => console.log("MongoDB соединение успешно"))
-  .catch((err) => console.log("MongoDB error:", err));
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.error("MongoDB error:", err));
 
 // экпорт для Vercel
-// Для Vercel Serverless
-module.exports = async (req, res) => {
-  // Передаем запрос в Express
-  return app(req, res);
-};
+module.exports = app;
