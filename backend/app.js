@@ -6,17 +6,16 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const routes = require("./routes");
 
-const port = 3001;
 const app = express();
 
-app.use(express.static("../frontend/dist"));
+const DB_CONNECTION_STRING =
+  "mongodb+srv://makcim2001:ZenG7f3srZ5EVX6u@cluster0.fh4mzpp.mongodb.net/shop?retryWrites=true&w=majority";
+
+// app.use(express.static("../frontend/dist"));
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "http://localhost:3000",
-      "http://localhost:3001",
-    ],
+    origin: ["https://gp-ready-q4fu.vercel.app/", "http://localhost:5173"],
     credentials: true,
   })
 );
@@ -24,10 +23,9 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 
-app.use("/", routes);
+app.use("/api", routes);
 
-mongoose.connect(process.env.DB_CONNECTION_STRING).then(() => {
-  app.listen(port, () => {
-    console.log(`Server started on port ${port}`);
-  });
-});
+mongoose
+  .connect(DB_CONNECTION_STRING)
+  .then(() => console.log("MongoDB соединение успешно"))
+  .catch((err) => console.log("MongoDB error:", err));
