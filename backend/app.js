@@ -28,4 +28,8 @@ mongoose
   .catch((err) => console.log("MongoDB error:", err));
 
 // экпорт для Vercel
-module.exports.app;
+// Для Vercel Serverless
+module.exports = async (req, res) => {
+  // Передаем запрос в Express
+  return app(req, res);
+};
