@@ -8,7 +8,7 @@ const routes = require("./routes");
 
 const app = express();
 
-app.use(express.static("../frontend/dist"));
+// app.use(express.static("../frontend/dist"));
 
 app.use(
   cors({
