@@ -8,9 +8,6 @@ const routes = require("./routes");
 
 const app = express();
 
-const DB_CONNECTION_STRING =
-  "mongodb+srv://makcim2001:ZenG7f3srZ5EVX6u@cluster0.fh4mzpp.mongodb.net/shop?retryWrites=true&w=majority";
-
 app.use(express.static("../frontend/dist"));
 
 app.use(
@@ -26,7 +23,7 @@ app.use(express.json());
 app.use("/api", routes);
 
 mongoose
-  .connect(DB_CONNECTION_STRING)
+  .connect(process.env.DB_CONNECTION_STRING)
   .then(() => console.log("MongoDB соединение успешно"))
   .catch((err) => console.log("MongoDB error:", err));
 
